@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 import openai
 from pytz import timezone
-import pyttsx3
+# import pyttsx3
 
 
 class AIDENCore:
@@ -18,10 +18,10 @@ class AIDENCore:
         self.current_time   = self.get_current_time()
         self.rules          = [rule for rule in _rules]
         self.user           = _user
-        self.speech_engine  = pyttsx3.init()
-        self.speech_engine.setProperty('rate', 75)   # Speed percent (can go over 100)
-        self.speech_engine.setProperty('volume', 1.0) # Volume 0-1
-        self.speech_engine.setProperty('voice', self.speech_engine.getProperty('voices')[0].id) # Set the voice to the first one in the list
+        #self.speech_engine  = pyttsx3.init()
+        #self.speech_engine.setProperty('rate', 75)   # Speed percent (can go over 100)
+        #self.speech_engine.setProperty('volume', 1.0) # Volume 0-1
+        #self.speech_engine.setProperty('voice', self.speech_engine.getProperty('voices')[0].id) # Set the voice to the first one in the list
         
         # set the openai api key    
         openai.api_key = "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"
@@ -38,9 +38,6 @@ class AIDENCore:
         self.communicate('system', f"{self.name} understands it is {self.current_time} and will repeat the time.", silent=True)
         self.communicate('system', f"{self.name} will remember the user's name and age is {self.userinfo()}.", silent=True)
        
-       
-        
-        
         
     def userinfo(self):
         '''return the user's info'''
@@ -49,7 +46,7 @@ class AIDENCore:
     def communicate(self, role, message, silent=False):
         '''communicate with the user'''
         
-        self.all_messages.append({"role": role, "content": message})
+        self.all_messages.append({"role": role, "content": message + '\n' + 'Message Timestamp:' + self.current_time})
         
         try:
             response = openai.ChatCompletion.create(model=self.model, messages=self.all_messages)
@@ -57,12 +54,10 @@ class AIDENCore:
             self.all_messages.append({"role": "assistant", "content": content})
             
             if not silent:
-                self.speech_engine.say(content)
                 print(content + '\n')
-                self.speech_engine.runAndWait()
             else:
-                print(content + '\n')   
-            return True
+                pass   
+            return content
         except Exception as err:
             print(err)
             
@@ -104,7 +99,8 @@ class AIDENCore:
             
     def text_to_speech(self, text: str):
         '''convert text to speech'''
-        self.speech_engine.say(text)
-        self.speech_engine.runAndWait()
+        #self.speech_engine.say(text)
+        #self.speech_engine.runAndWait()
+        pass
 
 

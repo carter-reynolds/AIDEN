@@ -1,20 +1,24 @@
-
-import pyttsx3
 import sys
+import os
 
 from classes.aiden.system import AIDENCore
 from classes.rules.master import AIDENRules
 from classes.user.system import User
-
-engine = pyttsx3.init()
-
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)
-
                 
 def main(input_type):
     
-    user  = User("Carter", 27)
+    name = input("Name: ")
+
+    while True:
+        try:
+            age = input("Age: ")
+            age = int(age)
+            break
+        except:
+            continue
+        
+    
+    user  = User(name, age)
     uinfo = user.userinfo()
     aiden_rules = AIDENRules(uinfo).get_rules()
     aiden = AIDENCore(aiden_rules, uinfo)
@@ -27,14 +31,11 @@ def main(input_type):
             break
 
         if command:
-            if aiden.communicate(command):
-                pass
-            else:
-                print("AIDEN could not understand you for some reason.")
-                break
-        else:
-            print("AIDEN could not understand you for some reason.")
-            break
+            response = aiden.communicate('user', command)
+            continue
+        
+
+       
 
     
             

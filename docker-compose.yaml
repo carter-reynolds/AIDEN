@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  shell:
+    container_name: "aiden_shell"
+    build: .
+    volumes:
+      - .:/dat
+    env_file:
+      - ./docker/shell.env
+    command: [/bin/bash, -c, sleep infinity]
+
