@@ -1,3 +1,4 @@
+import traceback
 from datetime import datetime
 import os
 import openai
@@ -40,33 +41,46 @@ class AIDENCore:
        
         
     def userinfo(self):
-        '''return the user's info'''
+        '''returns the current user's info'''
         return self.user[0], self.user[1]
     
     def communicate(self, role, message, silent=False):
-        '''communicate with the user'''
+        '''
+        communicate with the user
         
+        parameters:
+            role: the role of the speaker
+            message: the message to communicate
+            silent: whether to print the message or not (also controls text to speech - not currently enabled due to issues with cross-compatibility)
+        
+        returns:
+            the response from AIDEN
+        
+        raises:
+            Exception: if there is an error communicating with AIDEN which generally means there is an issue with the openai api
+        '''
+        
+        # append the message to the all_messages list including the timestamp the message was sent
         self.all_messages.append({"role": role, "content": message + '\n' + 'Message Timestamp:' + self.current_time})
         
         try:
-            response = openai.ChatCompletion.create(model=self.model, messages=self.all_messages)
-            content = response['choices'][0]['message']['content']
-            self.all_messages.append({"role": "assistant", "content": content})
+            # Since we want AIDEN to 'remember' the chat as it progresses, we need to send all messages to AIDEN
+            aiden_response = openai.ChatCompletion.create(model=self.model, messages=self.all_messages)   # send the messages to AIDEN
+            aiden_response_text = aiden_response['choices'][0]['message']['content']                      # get the response from AIDEN
+                               
+            self.all_messages.append({"role": "assistant", "content": aiden_response_text})               # append AIDEN's response to the all_messages list too
+
             
+            # print the response if silent was not passed as True
             if not silent:
-                print(content + '\n')
-            else:
-                pass   
-            return content
+                print(aiden_response_text + '\n')
+        
+            return aiden_response_text # return the response from AIDEN
+        
         except Exception as err:
             print(err)
-            
-            # PRint full traceback
-            import traceback
             traceback.print_exc()
-    
-            
-            return False
+
 
     def update_current_time(self):
         '''update the current time '''
@@ -74,14 +88,21 @@ class AIDENCore:
 
     def get_current_time(self):
         '''get the current time'''
+        # TODO: fetch system's actual timezone or just use UTC
         current_datetime = datetime.now().astimezone(timezone('America/New_York'))
         current_datetime = current_datetime.strftime("%A, %B %d, %Y %I:%M %p")
         return current_datetime
 
     def read_all_core_files(self):
         '''
-        allows AIDEN to read all files within this directory 
+        facilitates allowing AIDEN to read all files within this directory 
         and its subdirectories and return a string of all the files
+        
+        in theory, this should allow AIDEN to learn from all the files in this directory 
+        and its subdirectories by passing the returned string to the openai api
+        
+        returns:
+            a concatenated string of contents from all the files in this directory and its subdirectories
         '''
         core_file_string = ""
         for root, dirs, files in os.walk("."):
