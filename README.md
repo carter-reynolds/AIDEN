@@ -34,7 +34,7 @@
     
 For example, while AIDEN can indeed keep time and give you accurate time if asked, this only works because we are manually telling him what time it is every message essentially. This type of logic has to be applied to other things AIDEN should/can do. 
     
-<b>I am still experimenting actively with this behavior!</b>
+<b><a href="https://github.com/carter-reynolds/AIDEN/issues/3">I am still experimenting actively with this behavior and could use additional ideas!!!</a></b>
     
 GPT-3.5-Turbo is a powerful model but it still lacks actual connection to the internet, image processing, and true automated link viewing. Some of this functionality can be coded in, such as pulling all the headers from a website, and passing them to AIDEN to analyze and telling him it is website headers, but results can still be varied as it relies heavily on how you're telling AIDEN about the headers.
     
