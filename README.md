@@ -1,3 +1,5 @@
+<b>IMPORTANT REPO NOTE:<br><br>Master branch protection is disabled for some reason even knowing I pay for Github Pro and documentation claims I should have that functionality.<br><br>_Please be mindful on Master and it would be preferred to make a separate branch with a PR if suggesting/making changes or additions!_</b>
+<br><br><br><br>
 <H1>AIDEN : <i>Artificial Intelligence Data ENgine</i></h1>
 
 <sub><i><b>Current Model:</b> `GPT-Turbo-3.5`</i></sub>
