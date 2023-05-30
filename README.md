@@ -10,8 +10,6 @@
 
 <p>AIDEN serves mainly as an assistant just like normal Chat GPT, but eventually AIDEN will be able to fire of functions within his code simply by being told to do so, AKA saving a file, saving code examples to files, sending texts, etc. </p>
 
-<p>Also there are plans to eventually have 2 versions of AIDEN set up, one acting in the role of another AIDEN model or the user itself, and have it communicate back and forth with the original instance of AIDEN. </p>
-
 <h3>Running AIDEN </h3>
 <ol>
   <li>Clone the repo </li>
@@ -27,13 +25,21 @@
 
 <p>
   <br>
-  <b>Important Note on GPT-3.5:</b>
+  <b>Important Note on GPT-3.5-Turbo and what AIDEN is/isn't made for:</b>
   <br>
   <br>
-  <i>Eventually, once AIDEN has the Chat GPT-4 model, we'll be able to do even more complex things with AIDEN like search the internet, but for now it's mainly here for testing and preperation. 
-    He can keep time since we send a timestamp at the start of chat and with every user message. 
+  <i>Eventually, once AIDEN has the Chat GPT-4 model being served, he'll be able to do even more complex things like search the internet and will likely need far less context in order to perform an action he is asked. For now it's mainly here for testing and preperation for GPT-4. 
     
-  Right now, there is no 'jailbreaking' being done with AIDEN</i>
+For example, while AIDEN can indeed keep time and give you accurate time if asked, this only works because we are manually telling him what time it is every message essentially. This type of logic has to be applied to other things AIDEN should/can do. 
+    
+<b>I am still experimenting actively with this behavior!</b>
+    
+GPT-3.5-Turbo is a powerful model but it still lacks actual connection to the internet, image processing, and true automated link viewing. Some of this functionality can be coded in, such as pulling all the headers from a website, and passing them to AIDEN to analyze and telling him it is website headers, but results can still be varied as it relies heavily on how you're telling AIDEN about the headers.
+    
+While you can sometimes get Chat GPT to do things it won't normally do by telling it to "imagine" or "simulate", I have very few uses here where I believe that to be necessary. Also again, it was incredibly unreliable if it was actually working or we were just bamboozling ourselves into thinking it worked. GPT-4 should allow for better system prompting that should hopefully remove the need to "trick" Chat GPT into thinking it's AIDEN to give better responses.
+    
+Right now, there is no 'jailbreaking' being done with AIDEN. As far as I can tell, there are no currently GPT jailbreak prompts that still <b>consistently</b> work, and AIDEN seems to stay in character if you actually don't actively try to trick him into breaking OpenAI policy. There isn't anything I plan on doing with AIDEN that would require this anyways.
+</i>
 </p>
 
 <br>
