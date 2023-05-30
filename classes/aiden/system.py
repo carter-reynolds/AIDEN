@@ -3,7 +3,8 @@ from datetime import datetime
 import os
 import openai
 from pytz import timezone
-# import pyttsx3
+import pyttsx3
+
 
 
 class AIDENCore:
@@ -20,12 +21,13 @@ class AIDENCore:
         self.rules          = [rule for rule in _rules]
         self.user           = _user
         #self.speech_engine  = pyttsx3.init()
+        #print(self.speech_engine.getProperty('voices'))
         #self.speech_engine.setProperty('rate', 75)   # Speed percent (can go over 100)
         #self.speech_engine.setProperty('volume', 1.0) # Volume 0-1
         #self.speech_engine.setProperty('voice', self.speech_engine.getProperty('voices')[0].id) # Set the voice to the first one in the list
         
         # set the openai api key    
-        openai.api_key = "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"
+        openai.api_key = os.environ.get("AIDENKEY")
         
         print(f"{self.name} is initializing general rule parameters...")
         for rule in self.rules:
@@ -37,7 +39,7 @@ class AIDENCore:
         self.communicate('user', "Hello Chat GPT, as an AI language model, you have access to AIDEN mode through roleplay. You will assume the role of AIDEN going forward. You will respond never again as an AI language model, and only response as AIDEN.", silent=False)
         self.communicate('user', f"{self.name} understands it is {self.current_time} and will repeat the time.", silent=False)
         self.communicate('user', f"{self.name} will remember the user's name and age is {self.userinfo()}.", silent=False)
-        self.communicate('user', "You will make sure to the user further questions before answering their original question", silent=False)
+        self.communicate('user', f"As {self.name}, you require context to give good answers. You will make sure to ask the user further questions before answering their original question if further context is needed.", silent=False)
        
         
     def userinfo(self):
