@@ -16,8 +16,8 @@
 <ol>
   <li>Clone the repo </li>
   <li>Ensure Docker is installed </li>
-  <li><code> cd AIDEN/docker</code> </li>
-  <li><code> cp shell.env.template shell.env</code></li>
+  <li><code>cd AIDEN/docker</code> </li>
+  <li><code>cp shell.env.template shell.env</code></li>
   <li>Paste your OpenAI API key after <code>AIDENKEY=</code></li>
   <li><code>cd ../</code></li>
   <li><code>docker compose up -d </code></li>
