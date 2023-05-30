@@ -6,7 +6,7 @@
 <br>
 <br>
 
-<p>AIDEN is a WIP python Chat GPT implementation. Being built using the `openAI` Python library</p>
+<p>AIDEN is a WIP python Chat GPT implementation. Being built using the `openAI` Python library. The name was coined after asking AIDEN what it would be called when given a list of functionalities, mocking something similar to JARVIS from Iron Man. I liked it and decided to keep it.</p>
 
 <p>AIDEN serves mainly as an assistant just like normal Chat GPT, but eventually AIDEN will be able to fire of functions within his code simply by being told to do so, AKA saving a file, saving code examples to files, sending texts, etc. </p>
 
@@ -54,7 +54,7 @@ Right now, there is no 'jailbreaking' being done with AIDEN. As far as I can tel
   </ul>
   <li><b>AIDEN core class:</b></li>
   <ul>
-    <li><code>classes/aiden/system.py</code></li>
+    <li><code>classes/aiden/system.py</code> - All the code for AIDEN and Chat GPT connectivity/functionality. You can change AIDEN's name by changing the value of <code>self.name</code>, but there may still be some hardcoded stuff in the rules file referencing AIDEN.</li>
   </ul>
   <li><b>AIDEN Rules:</b></li>
   <ul>
@@ -63,7 +63,7 @@ Right now, there is no 'jailbreaking' being done with AIDEN. As far as I can tel
   </ul>
   <li><b>User code:</b></li>
   <ul>
-    <li><code>class/user/system.py</code></li>
+    <li><code>class/user/system.py</code> - User related data, not used for much at the moment. Eventually planned to integrate with SQL and store more user metadata to send to AIDEN 🤷‍♂️</li>
   </ul>
 </ul>
 
