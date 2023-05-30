@@ -1,8 +1,8 @@
 <H1>AIDEN : <i>Artificial Intelligence Data ENgine</i></h1>
 
-<sub><i><b>Current Model:</b>`GPT-Turbo-3.5`</i></sub>
+<sub><i><b>Current Model:</b> `GPT-Turbo-3.5`</i></sub>
 <br>
-<sub><i><b>Python Version:</b>`Python 3.7`</i></sub>
+<sub><i><b>Python Version:</b> `Python 3.7`</i></sub>
 <br>
 <br>
 
@@ -24,18 +24,22 @@
   <li><code>docker exec -it aiden_shell bash</code></li>
   <li><code>python3 main.py text </code></li>
 </ol>
-<hr></hr>
+
 <p>
   <br>
   <b>Important Note on GPT-3.5:</b>
   <br>
   <br>
-  <i>
-    Eventually, once AIDEN has the Chat GPT-4 model, we'll be able to do even more complex things with AIDEN like search the internet, but for now it's mainly here for testing and       preperation. He can keep time since we send a timestamp at the start of chat and with every user message. Right now, there is no 'jailbreaking' being done with AIDEN
-  </i>
+  <i>Eventually, once AIDEN has the Chat GPT-4 model, we'll be able to do even more complex things with AIDEN like search the internet, but for now it's mainly here for testing and preperation. 
+    He can keep time since we send a timestamp at the start of chat and with every user message. 
+    
+  Right now, there is no 'jailbreaking' being done with AIDEN</i>
 </p>
-<hr>
-<h2>File Structure:</h2>
+
+<br>
+
+
+<h2>AIDEN File Structure:</h2>
 <p>AIDEN was recently rewritten in a Class-like structure. He may be rewritten again as functionality/core code changes.</p>
 <ul>
   <li><b>Main Excutable:</b></li>
@@ -54,6 +58,28 @@
   <li><b>User code:</b></li>
   <ul>
     <li><code>class/user/system.py</code></li>
+  </ul>
+</ul>
+
+
+<h2>Docker File Structure:</h2>
+<p>AIDEN runs within a Docker container, which uses the following files:</p>
+<ul>
+  <li><b>Docker Enviroment Variables:</b></li>
+  <ul>
+    <li><code>docker/shell.template.env</code></li>
+  </ul>
+  <li><b>Docker Compose/Build File:</b></li>
+  <ul>
+    <li><code>docker-compose.yaml</code></li>
+  </ul>
+  <li><b>Docker Environment:</b></li>
+  <ul>
+    <li><code>environment.yaml</code></li>
+  </ul>
+  <li><b>Docker Config File:</b></li>
+  <ul>
+    <li><code>Dockerfile</code></li>
   </ul>
 </ul>
     
