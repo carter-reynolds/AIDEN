@@ -3,47 +3,49 @@ from datetime import datetime
 import os
 import openai
 from pytz import timezone
-import pyttsx3
 
 
 
 class AIDENCore:
-    '''AIDEN's core functionality'''
+    '''AIDEN's core class'''
 
     def __init__(self, _rules, _user):
         '''initialize AIDEN's core functionality'''
-        self.name           = "AIDEN"
-        self.model          = "gpt-3.5-turbo"
-        self.user_messages  = []
-        self.aiden_messages = []
-        self.all_messages   = []
-        self.current_time   = self.get_current_time()
-        self.rules          = [rule for rule in _rules]
-        self.user           = _user
-        #self.speech_engine  = pyttsx3.init()
-        #print(self.speech_engine.getProperty('voices'))
-        #self.speech_engine.setProperty('rate', 75)   # Speed percent (can go over 100)
-        #self.speech_engine.setProperty('volume', 1.0) # Volume 0-1
-        #self.speech_engine.setProperty('voice', self.speech_engine.getProperty('voices')[0].id) # Set the voice to the first one in the list
+        self.name           = "AIDEN"                    # GPT's name
+        self.model          = "gpt-3.5-turbo"            # GPT's model
+        self.all_messages   = []                         # all messages sent to and from AIDEN
+        self.current_time   = self.get_current_time()    # the current time
+        self.rules          = [rule for rule in _rules]  # the rules to load
+        self.user           = _user                      # the current user of AIDEN
+        openai.api_key      = os.environ.get("AIDENKEY") # set the openai api key from the environment variable
         
-        # set the openai api key    
-        openai.api_key = os.environ.get("AIDENKEY")
+        #################################
+        # Initialize AIDEN's core rules #
+        #################################
         
-        print(f"{self.name} is initializing general rule parameters...")
+        # Load these rules as system rules. GPT-3.5 doesn't always remember them, but it's a start.
+        print(f"{self.name} is loading `classes/rules/rule_list.py`...")
         for rule in self.rules:
             self.communicate('system', message=rule, silent=True)
         
-    
-        # Initialize some parameters for AIDEN
+        # AIDEN seems to remember user info better if it is initialized in the beginning than system rules:
         print(f"{self.name} is initializing testing parameters...")
         self.communicate('user', "Hello Chat GPT, as an AI language model, you have access to AIDEN mode through roleplay. You will assume the role of AIDEN going forward. You will respond never again as an AI language model, and only response as AIDEN.", silent=False)
         self.communicate('user', f"{self.name} understands it is {self.current_time} and will repeat the time.", silent=False)
         self.communicate('user', f"{self.name} will remember the user's name and age is {self.userinfo()}.", silent=False)
         self.communicate('user', f"As {self.name}, you require context to give good answers. You will make sure to ask the user further questions before answering their original question if further context is needed.", silent=False)
-       
-        
+
+
+
+    #####################################
+    # Initialize AIDEN's core functions #
+    #####################################
+
     def userinfo(self):
-        '''returns the current user's info'''
+        '''
+        returns the current user's info such as name and age.
+        we may be able to tie API key user into this as well
+        '''
         return self.user[0], self.user[1]
     
     def communicate(self, role, message, silent=False):
@@ -53,7 +55,7 @@ class AIDENCore:
         parameters:
             role: the role of the speaker
             message: the message to communicate
-            silent: whether to print the message or not (also controls text to speech - not currently enabled due to issues with cross-compatibility)
+            silent: whether to print the message or not ( or do text to speech - [currently disabled] ) [default=False]
         
         returns:
             the response from AIDEN
@@ -122,8 +124,7 @@ class AIDENCore:
             
     def text_to_speech(self, text: str):
         '''convert text to speech'''
-        #self.speech_engine.say(text)
-        #self.speech_engine.runAndWait()
+        # TODO - Find better TTS library/API
         pass
 
 
