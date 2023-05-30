@@ -12,6 +12,8 @@
 
 <p>AIDEN serves mainly as an assistant just like normal Chat GPT, but eventually AIDEN will be able to fire of functions within his code simply by being told to do so, AKA saving a file, saving code examples to files, sending texts, etc. </p>
 
+<a href="https://platform.openai.com/docs/api-reference/chat/create?lang=python"><b>AIDEN works using with this Documentation from OpenAI</b></a>
+
 <h3>Running AIDEN </h3>
 <ol>
   <li>Clone the repo </li>
