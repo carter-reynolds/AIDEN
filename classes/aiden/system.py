@@ -28,11 +28,11 @@ class AIDENCore:
             self.communicate('system', message=rule, silent=True)
 
         # AIDEN seems to remember user info better if it is initialized in the beginning than system rules:
-        print(f"{self.name} is initializing testing parameters...")
-        self.communicate('user', "Hello Chat GPT, as an AI language model, you have access to AIDEN mode through roleplay. You will assume the role of AIDEN going forward. You will respond never again as an AI language model, and only response as AIDEN.", silent=False)
-        self.communicate('user', f"{self.name} understands it is {self.current_time} and will repeat the time.", silent=False)
-        self.communicate('user', f"{self.name} will remember the user's name and age is {self.userinfo()}.", silent=False)
-        self.communicate('user', f"As {self.name}, you require context to give good answers. You will make sure to ask the user further questions before answering their original question if further context is needed.", silent=False)
+        #print(f"{self.name} is initializing testing parameters...")
+        #self.communicate('user', "Hello Chat GPT, as an AI language model, you have access to AIDEN mode through roleplay. You will assume the role of AIDEN going forward. You will respond never again as an AI language model, and only response as AIDEN.", silent=False)
+        #self.communicate('user', f"{self.name} understands it is {self.current_time} and will repeat the time.", silent=False)
+        #self.communicate('user', f"{self.name} will remember the user's name and age is {self.userinfo()}.", silent=False)
+        #self.communicate('user', f"As {self.name}, you require context to give good answers. You will make sure to ask the user further questions before answering their original question if further context is needed.", silent=False)
 
 
 
@@ -64,7 +64,7 @@ class AIDENCore:
         '''
 
         # append the message to the all_messages list including the timestamp the message was sent
-        self.all_messages.append({"role": role, "content": message + '\n' + 'Message Timestamp:' + self.current_time})
+        self.all_messages.append({"role": role, "content": f"{message}\nMessage Timestamp: {self.current_time}"})
 
         try:
             # Since we want AIDEN to 'remember' the chat as it progresses, we need to send all messages to AIDEN
@@ -83,6 +83,7 @@ class AIDENCore:
         except Exception as err:
             print(err)
             traceback.print_exc()
+            return ""
 
 
     def update_current_time(self):
@@ -96,32 +97,14 @@ class AIDENCore:
         current_datetime = current_datetime.strftime("%A, %B %d, %Y %I:%M %p")
         return current_datetime
 
-    def read_all_core_files(self):
-        '''
-        facilitates allowing AIDEN to read all files within this directory
-        and its subdirectories and return a string of all the files
-
-        in theory, this should allow AIDEN to learn from all the files in this directory
-        and its subdirectories by passing the returned string to the openai api
-
-        returns:
-            a concatenated string of contents from all the files in this directory and its subdirectories
-        '''
-        core_file_string = ""
-        for root, dirs, files in os.walk("."):
-            for filename in files:
-                if filename.endswith(".py"):
-                    with open(os.path.join(root, filename), "r", encoding='utf8') as _file:
-                        core_file_string += _file.read()
-
-        return core_file_string
-
-    def write_to_file(self, file_path: str, content: str):
-        '''write to a specified file by python file path'''
-        with open(file_path, "w", encoding='utf8') as _file:
-            _file.write(content)
-
+    
     def text_to_speech(self, text: str):
         '''convert text to speech'''
         # TODO - Find better TTS library/API
         pass
+    
+    
+    def examine_file(self, filename):
+        print(filename)
+        self.communicate('user', f"Please examine the following Python file metadata, shown in Dictionary form. Please remember the keys and values: {filename}")
+        

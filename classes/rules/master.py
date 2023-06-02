@@ -3,7 +3,7 @@ from classes.rules.rule_list import _rules
 class AIDENRules:
     '''A class defining AIDEN's rules'''
 
-    def __init__(self, _user:list):
+    def __init__(self):
         self.role = "AIDEN"
         self.rules = self._load_rules()
 
